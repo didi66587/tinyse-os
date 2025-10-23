@@ -4,8 +4,9 @@ start:
     mov ah, 0x0E
     mov al, 'H'
     int 0x10
-    mov al, 'Ý'
+    mov al, 'Ä°'
     int 0x10
 
 hang:
    jmp hang
+
