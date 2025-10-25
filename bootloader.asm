@@ -1,7 +1,11 @@
 org 0x7C00
 
 start:
-    mov [BOOT_DRIVE], dl
+    cli
+    cld
+    mov bl, dl
+    xor si, si
+    xor bx, bx
 
     mov ah, 0x0E
     mov al, 'O'
@@ -13,21 +17,24 @@ start:
     mov bx, 0
     mov cx, 4
 .load_kernel:
-    cmp cx, 0
+    cmp si, 4
     je run_kernel
 
     mov ah, 0x02
     mov al, 1
     mov ch, 0
-    mov cl, bl
-    add cl, 2
+
+    mov ax, si
+    mov cl, 2
+    add cl, al
+
     mov dh, 0
-    mov dl, [BOOT_DRIVE]
+    mov dl, bl
     int 0x13
     jc disk_error
 
-    inc bx
-    dec cx
+    add bx, 512
+    inc si
     jmp .load_kernel
 
 run_kernel:
