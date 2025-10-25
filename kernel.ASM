@@ -43,10 +43,15 @@ start:
       mov al, 00h
       int 21h
       jmp start
+   
+   bitir:
+       mov ah, 4Ch
+       int 21h
 
 tarayıcı db 'DOSLYNX.EXE',0
 hang:
    jmp hang
+
 
 
 
