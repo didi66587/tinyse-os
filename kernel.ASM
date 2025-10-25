@@ -1,7 +1,7 @@
 org 0x0000
 
 start:
-    ; print. yazdır. 
+    ; print. yazdir. 
     mov ah, 0x0E
     mov al, 'H'
     int 0x10
@@ -29,7 +29,7 @@ start:
     int 0x10
     mov al, 'T'
     int 0x10
-    ; ----------------------- input. girdi al.
+    ; -
     mov ah, 0x00
     int 0x16
     cmp al, 'T'
@@ -38,20 +38,15 @@ start:
     je bitir
     jmp start
     yaz:
-      mov dx, offset tarayıcı
-      mov ah, 4Bh
-      mov al, 00h
-      int 21h
-      jmp start
-   
-   bitir:
-       mov ah, 4Ch
-       int 21h
+       mov ax, 0x1000
+       mov es, ax
+       xor bx, bx
+       jmp 0x1000:0000
 
-tarayıcı db 'DOSLYNX.EXE',0
-hang:
-   jmp hang
-
-
+    bitir:
+        jmp hang
+    hang:
+       hlt
+       jmp hang
 
 
