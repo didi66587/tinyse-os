@@ -1,0 +1,42 @@
+
+                               DosLynx Beta Hype
+                                       
+   Garrett Blythe (blythe@falcon.cc.ukans.edu)
+   22 Mar 94 11:15:28 CST
+   
+Just to inform those of you looking for a DOS client for WWW, your wait is
+not far from over.
+
+DosLynx is a DOS text based WWW client.
+The minimum system requirments are:
+        Chip:           8086
+        Monitor:        Mono, B&W, or Color
+        Mouse:          Optional
+        Network:        Packet Drivers supported.
+                        This includes SLIP.
+DosLynx is currently made with:
+        Compiler:       Borland C++ v3.1
+        Librairies:     CERN's WWW
+                        Borland's TurboVision
+                        Erick Engelke's Waterloo TCP
+0.1 Beta release will be made in April.  As in beta, I mean that I am
+releasing DosLynx as a type of feedback tool to help me further implement
+the product in a way seen fit by the users and, of course, for user bug
+reports.
+
+I will post relevant information for anonymous ftp retrieval to this newgroup
+on the day of availability.  DosLynx will be free software.
+
+blythe@falcon.cc.ukans.edu
+
+
+Trodden Soil
+
+I am trodden soil.
+Dust covers my face.
+Soles crush my nature
+Revealing a hard empty space.
+
+Garrett Arch Blythe  (913)864-0465
+User Services Student Programmer/Consultant
+University of Kansas Computer Center

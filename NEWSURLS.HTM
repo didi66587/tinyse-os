@@ -1,0 +1,82 @@
+<HTML><HEAD><TITLE>DosLynx News URLs</TITLE></HEAD>
+
+<BODY>
+<H1>DosLynx News URLs</H1><P>
+
+DosLynx now honors three forms of news: . . . URL.  Each of these forms
+has two variations.  You may note that all six variations start with
+news:  However, none of them continues with //.  The three forms and six
+variations are as follows:<P>
+
+<H2><a href="news:?">news:?</a><BR>
+    <a href="news:*">news:*</a></H2>
+These two variations both bring a list of the news groups your news
+server maintains.  The difference between the two is that
+<a href="news:?">news:?</a> brings a simple list with one line per group.
+While <a href="news:*">news:*</a> brings an HTML list with an anchor or
+link for each group.  The groups in this list will also be presented one
+per line.  However, inside the HTML, there will be two copies of each
+group name on separate lines.<P>
+
+If the news server you contact is anything like the one my ISP retails to
+me, these lists will be way too long for DosLynx to display in full.
+The news server I contact has over 29 thousand news groups in its list!
+Even with the short (<a href="news:?">news:?</a>) form, DosLynx can only
+display the first 15,800 groups listed.<P>
+
+To access your news server's whole list, you may need to use the DosLynx
+Navigate|Download&nbsp;Selection or File|Save&nbsp;Source menu entry
+to copy the list into a local file.  DosLynx makes an exception to its
+usual practice when either of these menu entries are applied to the
+<a href="news:?">news:?</a> URL or its presentation.  In this case, it
+does not prefix the local file copy written with a
+&lt;BASE HREF=&nbsp;.&nbsp;.&nbsp;.&nbsp;&gt; HTML tag.  That leaves this
+local file copy unencumbered for sorting, if desired.<P>
+
+I select one of this document's <a href="news:?">news:?</a> links and use
+Navigate|Download&nbsp;Selection to receive my news server's list into a
+.TXT file.  Next, I sort the file.  I might then use EDLIN, or another
+editor or file splitting utility that is up to handling a file of this
+size, to split the sorted file into two halves that I could view and
+search with DosLynx.  However, I usually simply use the DOS FIND command
+to search the whole file for key words of interest.  Or, to exclude certain
+key words.  The DOS FIND command's results may be redirected into a small
+file which is much more convenient for viewing.  I might eventually add my
+favorites to my HotList file.<P>
+
+<H2><a href="news:newsgroup.name">news:newsgroup.name</a><BR>
+    <a href="news:newsgroup.name/firstnotenumber-lastnotenumber">
+             news:newsgroup.name/firstnotenumber-lastnotenumber</a></H2>
+These two variations both bring a list of up to 20 to 40 news article, or
+note, "headers".  The short variation brings a list of up to 20 of the
+specified news group's most recent note headers.  The long variation
+allows you to request the headers for older notes by specifying a range
+of notes by their numbers.  The resulting lists also carry links to
+requests for any earlier and later note headers available.<P>
+
+If you use the long variation to specify a range that includes more 
+than 40 headers, the 20 headers ending at lastnotenumber will be listed.
+So, you might simply use a shorter
+<a href="news:newsgroup.name/0-lastnotenumber">
+         news:newsgroup.name/0-lastnotenumber</a> variation of this URL.<P>
+
+The headers presented in these lists are links which may be selected to
+retrieve the underlying notes.  Each header's presentation displays up
+to twelve octets of the author's e-mail address, the size of the
+underlying note in lines, and up to 150 octets of the note's Subject.<P>
+
+<H2><a href="news:unique.note.id@host.name.dom">
+             news:unique.note.id@host.name.dom</a><BR>
+ <a href="news:%3Cunique.note.id@host.name.dom%3E">
+         news:&lt;unique.note.id@host.name.dom&gt;</a></H2>
+These two variations are equivalent and both bring a news article, or
+note, itself.  The unique.note.id(s) tend to get quite long and cryptic.
+However, you won't need to be typing (m)any of these.  Rather, you'll
+simply be selecting headers from the lists described in the section
+above.<P>
+
+<a href="FCMEMADR.GIF">Fred C. Macall</a><BR>
+12 October 2002<BR>
+E-Mail address updated.<BR>
+17 June 2005
+</BODY></HTML>

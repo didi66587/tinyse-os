@@ -1,0 +1,213 @@
+                                  HISTORY.TXT
+                      (for DosLynx v0.44b, September 2020)
+                               by Fred C. Macall
+
+
+Introduction
+
+In this document, I'll try to take up where I left off in the last
+history.txt and not rehash the history of the previous versions.
+Also, I'll try not to repeat the issues discussion presented in the info.htm
+(or, Quick Start) document included in this release.  However, there is a
+list of To Do(s) at the end.  If you want to know everything else there is
+to know about my previous releases of DosLynx, you can get that history
+from:
+
+http://macall.net/dlx2xdoc.zip
+http://macall.net/dlx3xdoc.zip
+http://macall.net/dlx43/info.htm
+and
+http://macall.net/dlx43/history.txt
+
+dlx2xdoc.zip collects the info.htm and history.txt documents for all eight
+of my DosLynx v0.2xb releases.  dlx3xdoc.zip does likewise for all nine of
+my DosLynx v0.3xb releases.
+
+
+DosLynxS v0.43b Inability to make https/SSL/TLS Connections
+
+In the years following the release of DosLynx v0.43b, DosLynxS suffered an
+apparent slow decline in its ability to make https/SSL/TLS connections with
+many Web servers.  It issued the eventually dreaded message:
+
+WWW Alert:  Unable to make secure connection to remote host.
+
+each time it failed in an attempt to make a secure connection.
+
+That apparent slow decline in success with https/SSL/TLS connections came
+to be seen as a result of evolution in the Web, rather than any perticular
+bug in DosLynxS.  DosLynxS v0.43b was made with an OpenSSL version 0.9.8e
+library, which supported the SSL v2, SSL v3, and TLS v1.0 protocols.
+At the time, that support was sufficient for connecting with most secure
+Web servers.  However, as time passed, security researchers found many
+vulnerabilities in those protocols.  Meanwhile, SSL/TLS software developers
+worked to support the TLS v1.1, TLS v1.2, and TLS v1.3 protocols.
+So, as Web server operators updated their systems, they chose to disallow
+connections based on the older protocols.  It has became "fashionable" for
+Web servers supporting TLS v1.2 to allow connection with nothing less.
+Even though little or no bad news has been reported about TLS v1.1 .
+
+In order to get DosLynxS back in the game, version 0.44b has been made with
+an OpenSSL version 1.0.2u library.  This software adds support for the
+TLS v1.1 and TLS v1.2 protocols to the earlier support.
+(Though, it does not support SSL v2, by default.  Also, DosLynxS now
+configures its SSL/TLS client to disallow connections based on SSL v3 .)
+This OpenSSL update increases the size of DosLynxS by about 50 percent!
+
+DosLynxS v0.44b brings a couple more error messages to keep the dreaded
+WWW Alert: . . .
+message quoted above company.  These are:
+
+SSL_connect( ) returned: <r>, error code: <e>.
+
+Where <r> is SSL_connect( )'s return code, if zero or negative. 
+Usually, it is -1 in this error case.  And, <e> is from an immediately
+following SSL_get_error( ) call.  Usually, it is 1 (called, SSL_ERROR_SSL)
+or 5 (called, SSL_ERROR_SYSCALL).  If you have an OpenSSL version 1.0.2u
+installation (not included in the DosLynx packages), you can learn more
+about these things by studying man SSL_get_error and ssl.h .
+
+Anticipatory error: <E>.
+
+Where <E> is a non-zero eight hex digit error code from ERR_get_error( )
+call(s) immediately following an SSL_connect( ) error return.
+There may be zero, one, or more of these.  If you have an
+OpenSSL version 1.0.2u installation (not included in the DosLynx packages),
+you may obtain short texts, like the three quoted below, for these errors
+by commanding:
+openssl errstr <E>
+
+Once DosLynxS v0.44b was thought to be completed or "done", it was able to
+access a lot of Web servers that DosLynxS v0.43b could no longer get.
+However, there was a significant group of servers that DosLynx v0.44b still
+couldn't get.  Typically, one of the following three Anticipatory errors
+was obtained in attempts to contact these servers:
+
+ 140770FC:SSL routines:SSL23_GET_SERVER_HELLO:unknown protocol
+ 14077410:SSL routines:SSL23_GET_SERVER_HELLO:sslv3 alert handshake failure
+ 14077438:SSL routines:SSL23_GET_SERVER_HELLO:tlsv1 alert internal error
+
+What could the matter be?
+
+After a lot of study, I started thinking the lack of support that DosLynxS
+then had for server name indication (SNI) might be the problem. 
+Without SNI, the "front end" of a multi-hosted Web serving installation is
+left to guess which of its "virtual hosts" is required to serve each
+connection request.
+
+Eventually, I added an SSL_set_tlsext_host_name( ) call to the https
+connection establishment code.  The TLS client provides the thereby
+supplied hostname in its "client hello" message(s).  That gives
+DosLynxS v0.44b its "server name indication" capability.  With that
+addition for SNI, the group of still troublesome Web servers evaporated!
+Unfortunately, the requested hostname likely gets revealed to "sniffers"
+and ISPs as a result of its inclusion in the TLS client's hello
+message(s).  SNI is not provided in connection requests for e-mail sending
+service.
+
+A remaining issue, with the updated https/SSL/TLS support, is seen on my
+IBM Personal System/2 Model 55 SX, Mickey.  Mickey is a '386 based
+2.3 BogoMIPS PC with no NPX.  Running on Mickey, DosLynxS v0.44b
+is unable to connect with a large group of Web servers that seem to present
+no problem with more capable PCs.  It obtains the SSL_connect( )
+error code 5 (called:  SSL_ERROR_SYSCALL) introduced above.
+
+To be clear:  DosLynxS v0.44b still does not check servers' certificate(s).
+
+
+To Do
+
+With both https/SSL/TLS support and secure e-mail support working in the
+DosLynx 32-bit Protected Mode version, I feel that I have reached all of
+my previous higher priority goals for DosLynxS.  Whether either of the
+16-bit versions will ever be able to incorporate OpenSSL support still
+remains to be seen.  However, the amount of code needed and the trouble
+seen with Mickey (described above) dim the prospects for this.
+
+My informal DosLynx issues list still has a lot of pending issues.
+But, few of those seem to me to be "burning" issues.  If DosLynx has a
+burning issue, I think it is to find some way to give it some support for
+Java Scripts!  However, right now, I still can't plan on having that ready
+in the next release.
+
+If you use DosLynx at least occasionally, I hope you will write and tell me
+what feature(s) or fix(es) would make it more useful for you.
+
+Here is a summary of some of the pending DosLynx issues not discussed
+anywhere above:
+
+  -  Provide https/SSL/TLS support for the DosLynx 16-bit version(s).
+     (This is expected by many Web servers that support data entry.)
+
+  -  Provide Login (original AUTHINFO) support for the news client?
+
+  -  Support the HTML Form <INPUT TYPE=file . . . variation.  (This is part
+     of the so called "file upload" capability.)
+
+  -  Find some way to guard against making duplicate Post requests.
+     (Bypass:  Move the anchor cursor off the submit button after using it,
+     if/when you resume, or first return to, a window containing a submitted
+     Form!)
+
+  -  Provide some way for retrying a temporarily failed e-mail send attempt?
+
+  -  Support the HTML Form <BUTTON . . . tag
+     (like <INPUT TYPE=submit . . . )?
+
+  -  Automatically replace space(s) with %20 , in links being followed or
+     other URLs requested.  (Bypass:  Use the Navigate|Show Destination URL
+     (Alt-U) menu entry or command to paste a troublesome link's URL into
+     the File|Open URL... (F3) dialog's history.  Then, edit it for use.)
+
+  -  Provide a convenient Cookie(s) file viewing dialog or tool.
+
+  -  How about a fast way to get to the directories, at the end of a long
+     files list, in a local file dialog?  (Bypass:  After focusing on a
+     list of local files, use Ctrl-PgDn to move to its end, quickly.
+     Use Ctrl-PgUp to move back to its start, quickly.)
+
+  -  Find a way for the 16-bit Protected Mode version to support the stock
+     Microsoft mouse driver in Windows 2000 DOS windows, successfully.
+     Find a way for the 32-bit Protected Mode version to support the stock
+     Microsoft mouse driver in Windows NT DOS windows, successfully.
+     (This isn't an issue with the DosLynx Real Mode version.
+     Bypass:  Use mouse= configuration to disable support of the mouse,
+     where necessary.)
+
+  -  Find a graceful way for the FTP client to deal with directory reports
+     that are too large to be memorized.  (This is hardly an issue with the
+     DosLynx Protected Mode versions.)
+
+  -  Find a way for the File|Save Source and Navigate|Download Selection
+     menu entries to handle FTP directory reports that are too large to be
+     memorized.  (This is hardly an issue with the DosLynx Protected Mode
+     versions.)
+
+  -  When your display is set in a VESA mode upon running DosLynx, its
+     arrangement(s) for saving and restoring the screen mode may break down.
+     (Bypass:  Set your display into a "legacy mode" before running
+     DosLynx.  Or, (re)do the display set up you want afterward.)
+
+  -  Provide for displaying directory entry details, beyond filename, from
+     the WAR-FTP Daemon's DOS style directory reports.
+
+  -  Provide a configurable "download directory".  (Bypass:  use the command
+     line /P option (as demonstrated in DOSLYNX.BA_) and set your DOS
+     default drive and path to specify the directory you want to download
+     into.)
+
+  -  Provide a "disk view" number at the bottom of the screen that isn't
+     limited to the 2.1 GB maximum size of a DOS FAT16 partition.  So, the
+     free space available for a DosLynx temporary directory in a large DOS
+     FAT32 partition won't be under-reported.  (Presently, the disk view
+     number stays at or about 2147418112 as long as the large partition has
+     at least that much space free.)
+
+I hope you will let me know what you think about the way the DosLynx
+Protected Mode versions have turned out.  Or, if you have any comment(s) or
+question(s) in any connection with DosLynx v0.44b!  As I don't have a
+suitable '286 based PC, presently, I am especially interested in hearing
+from anyone who is able to try the DosLynx 16-bit Protected Mode version on
+such a system.
+
+fcm

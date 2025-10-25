@@ -1,0 +1,123 @@
+
+        DosLynx Menu Short-Cut Keys
+ 
+Alt-F  Pull down File menu
+        F3                  Open a remote URL...
+        Shift-F3            Open a Local File...
+        Alt-F3              Close Current window
+        F2                  Save Rendering to disk
+        Alt-P               Print Rendering...
+        Alt-V               Clip View
+        Alt-S               Save Source
+        Ctrl-F10            Shell out to DOS
+        Alt-X               Exit DosLynx
+
+Alt-N  Pull down Navigate menu
+        Alt-F4              Find new string
+        F4                  Find Again
+        J, 2, or Tab        Select Next link
+        K, 8, or Shift-Tab  Select Previous link
+        Alt-R               Reload Current Document
+        Alt-D               Download Selection
+        L, 6, or Enter      Activate Selected link or input dialog
+        H or 4              Return to Prior Document
+        Alt-G               Go To
+        F7                  Search Index...
+        Alt-U               Show Selected URL
+
+Alt-O  Pull down Options menu
+
+Alt-W  Pull down Window menu
+        Alt-M               Show Messages window
+        F5                  Zoom window In/Out
+        Alt-F5              Resize window
+        F6                  Show Next window
+        Alt-F3              Close Current Window
+
+Alt-H  Pull down Hotlist menu
+        F1                  View Hotlist
+        Alt-A               Add Current to Hotlist
+        Alt-T               Add Link to Hotlist
+        F9                  View Home Page
+
+
+* Quick hack: created the "Z" command to say DosLynx is a Mozilla
+  compatable when it requests the URL.  Not sure how this
+  command will evolve in the future.
+
+        DosLynx Control, Movement, and Navigation Keys
+
+Esc    Cancel and close most dialog windows, including Messages.
+       Stop TCP/IP reception.  Stop parsing.  Or, stop formatting.
+
+Enter  Activate link or input dialog.  Activate selected menu entry.
+       Press default or selected Push Button and close most dialogs.
+
+Space  Press selected Push Button and close most dialog windows.
+       Move down a screen in document windows.
+
+Alt-n  Show window n.
+
+Home, End, Page Up, Page Down, and arrows   Move within dialogs,
+                                            menus, and windows.
+
+Remember that you can navigate with your numeric key pad by putting
+Num Lock ON.
+
+1, Ctrl-Page Down, or Ctrl-PgDn  Move to end of document.
+
+2, J, or Tab                     Select next link.
+
+3, Space, Page Down, or PgDn     Move down a screen.
+             
+4 or H                           Return to prior document.
+
+6, L, or Enter                   Activate selected link
+                                 or Form input dialog.
+
+7, Ctrl-Page Up, or Ctrl-PgUp    Move to top of document.
+
+8, K, or Shift-Tab               Select previous link.
+
+9, Page Up, or PgUp              Move up a screen.
+
+
+     1     2     3     4     5     6     7     8     9     0
+    End    v    PgDn   <           >    Home   ^    PgUp
+
+
+        7     8    9
+       Home   ^   PgUp
+
+        4     5    6
+        <          >
+
+        1     2    3
+       End    v   PgDn
+
+        DosLynx Keys for Selecting and Clipping
+
+Hold Shift down while using arrow keys    Select text area.
+
+Shift-Page Up or Shift-PgUp     Select all text from top-of-screen
+                                to character before cursor.
+
+Ctrl-Shift-Page Up or Ctrl-Shift-PgUp     Select all text
+                                          from very beginning of data
+                                          to character before cursor.
+ 
+Shift-Page Down or Shift-PgDn   Select all text from cursor
+                                to bottom-of-screen.
+
+Ctrl-Shift-Page Down or Ctrl-Shift-PgDn   Select all text from cursor
+                                          to very end of data.
+
+Un-Shifted arrow keys           Remove any selection from text.
+
+Backspace or Del(ete)           Delete all selected text.
+
+
+Fred C. Macall
+
+Added Clip View and associated keys.
+10 November 2010.
