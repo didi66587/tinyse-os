@@ -1,5 +1,7 @@
 org 0x0000
 
+BOOT_DRIVE db 0
+
 start:
     cli
     mov ax, 0x1000
@@ -31,7 +33,7 @@ start:
     int 0x10
     mov al, 'I'
     int 0x10
-    mov al, '.'
+    mov al, ' '
     int 0x10
     mov al, 'T'
     int 0x10
@@ -39,22 +41,33 @@ start:
     mov ah, 0x00
     int 0x16
     cmp al, 'T'
-    je yaz
+    je load_exe
     cmp al, 27
-    je bitir
+    je hang
     jmp start
-    yaz:
-      mov ds, ax
-      mov ah, 0x4B
-      mov al, 0x00
-      mov dx, filename
-      int 0x21
-      jmp start
-    bitir:
-        jmp hang
-    hang:
-       hlt
-       jmp hang
-    filename db 'DOSLYNX.EXE',0
+    load_exe:
+        mov ah, 0x02
+        mov al, 0x01
+        mov ch, 0
+        mov cl, 3
+        mov dh, 0
+        mov dl, [BOOT_DRIVE]
+        mov bx, 0x0000
+        mov ax, 0x2000
+        mov es, ax
+        int 0x13
+        jc start
 
+        mov ax, 0x2000
+        mov ds, ax
+        mov bx, 0x0000
+        mov ax, [bx+0x14]
+        mov cx, [bx+0x16]
+        add ax, 0x2000
+        push cx
+        push ax
+        retf
 
+hang:
+   hlt
+   jmp hang
