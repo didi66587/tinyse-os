@@ -1,7 +1,13 @@
 org 0x0000
 
 start:
-    ; print. yazdir. 
+    cli
+    mov ax, 0x1000
+    mov ds, ax
+    mov es, ax
+    mov ss, ax
+    mov sp, 0xFFFF
+
     mov ah, 0x0E
     mov al, 'H'
     int 0x10
@@ -38,15 +44,17 @@ start:
     je bitir
     jmp start
     yaz:
-       mov ax, 0x1000
-       mov es, ax
-       xor bx, bx
-       jmp 0x1000:0000
-
+      mov ds, ax
+      mov ah, 0x4B
+      mov al, 0x00
+      mov dx, filename
+      int 0x21
+      jmp start
     bitir:
         jmp hang
     hang:
        hlt
        jmp hang
+    filename db 'DOSLYNX.EXE',0
 
 
