@@ -38,25 +38,28 @@ start:
     mov al, 'T'
     int 0x10
     ; -
-    mov ah, 0x00
-    int 0x16
-    cmp al, 'T'
-    je load_exe
-    cmp al, 27
-    je hang
-    jmp start
-    load_exe:
+    wait_key:
+        mov ah, 0x00
+        int 0x16
+        cmp al, 'T'
+        jne wait_key
+
+        mov si, 3
+        mov cx, 73
+
+    load_loop:
         mov ah, 0x02
-        mov al, 0x01
+        mov al, 1
         mov ch, 0
         mov cl, 3
         mov dh, 0
         mov dl, [BOOT_DRIVE]
-        mov bx, 0x0000
-        mov ax, 0x2000
-        mov es, ax
         int 0x13
-        jc start
+        jc disk_error
+
+        add bx, 512
+        inc si
+        loop load_loop
 
         mov ax, 0x2000
         mov ds, ax
@@ -67,6 +70,12 @@ start:
         push cx
         push ax
         retf
+
+    disk_error:
+        mov ah, 0x0E
+        mov al, 'E'
+        int 0x10
+        jmp hang
 
 hang:
    hlt
