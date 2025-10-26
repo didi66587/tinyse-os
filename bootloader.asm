@@ -20,11 +20,11 @@ start:
     int 0x10
 
     xor si, si
-    mov bx, 0x1000
+    mov ax, 0x1000
     mov es, ax
+    mov bx, 0x0000
 
 
-xor bl, bl
 .load_kernel:
     cmp si, 4
     je run_kernel
@@ -33,8 +33,10 @@ xor bl, bl
     mov al, 1
     mov ch, 0
     mov dh, 0
-    mov cl, 2
-    add cl, bl
+
+    mov ax, si
+    add ax, 2
+    mov cl, al
 
     mov dl, [BOOT_DRIVE]
     int 0x13
