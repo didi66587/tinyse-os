@@ -1,4 +1,4 @@
-org 0x0000
+org 0x1000
 
 BOOT_DRIVE db 0
 
@@ -82,3 +82,4 @@ hang:
    jmp hang
 
 times 512*4-($-$$) db 0
+
