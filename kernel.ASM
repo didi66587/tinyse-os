@@ -80,3 +80,5 @@ start:
 hang:
    hlt
    jmp hang
+
+times 512*4-($-$$) db 0
