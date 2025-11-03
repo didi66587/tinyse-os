@@ -3,5 +3,5 @@ This project uses Super Grub Disk files under the GNU General Public License v3 
 Source: https://www.supergrubdisk.org/
 Original copyright: Adrian Gibanel Lopez
 
-Modifications by: <didi66587>
+Modifications by: <Hanifi-TinyseX>
 
